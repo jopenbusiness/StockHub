@@ -17,13 +17,14 @@
 
 - 오류 신고 : Reserved
 
-    
+
+  
 
 ## Libraries
 
-- TypeScript
+- TypeScript 5.8.2
   - JavaScript, Java
-- Python
+- Python 3.12.9
 
 ```bash
 #--- Node.js 라이브러리의 버전 확인

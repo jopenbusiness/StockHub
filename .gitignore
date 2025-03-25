@@ -1,9 +1,16 @@
 #--- Node.js
 node_modules/
 
+package-lock.json
+
+#--- TypeScript
+lib/
+
 #--- https://github.com/microsoft/typescript-go
 built/
 cmd/
 
 #--- MacBook
 .DS_Store
+
+zz*

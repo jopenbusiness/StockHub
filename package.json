@@ -1,38 +1,58 @@
 {
-  "name": "stockhub",
-  "version": "1.0.0",
-  "description": "증권사 Open API Hub 서비스",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jopenbusiness/StockHub.git"
-  },
-  "keywords": [
-    "Stock",
-    "REST",
-    "Open",
-    "API"
-  ],
-  "author": {
-    "name": "gye hyun james kim",
-    "email": "pnuskgh@gmail.com",
-    "url": "https://www.obcon.biz/"
-  },
-  "contributors": [
-    {
-      "name": "gye hyun james kim",
-      "email": "pnuskgh@gmail.com",
-      "url": "https://www.obcon.biz/"
+    "name": "stockhub",
+    "version": "0.0.0",
+    "description": "증권사 Open API Hub 서비스",
+    "keywords": [
+        "Stock",
+        "REST",
+        "Open",
+        "API"
+    ],
+    "author": {
+        "name": "gye hyun james kim",
+        "email": "pnuskgh@gmail.com",
+        "url": "https://www.obcon.biz/"
+    },
+    "contributors": [
+        {
+            "name": "gye hyun james kim",
+            "email": "pnuskgh@gmail.com",
+            "url": "https://www.obcon.biz/"
+        }
+    ],
+    "homepage": "https://github.com/jopenbusiness/StockHub#readme",
+    "bugs": {
+        "url": "https://github.com/jopenbusiness/StockHub/issues"
+    },
+    "license": "GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jopenbusiness/StockHub.git"
+    },
+    "type": "module",
+    "packageManager": "npm@10.9.2",
+    "volta": {
+        "node": "22.14.0",
+        "npm": "10.9.2"
+    },
+    "devDependencies": {
+        "execa": "^9.5.2",
+        "hereby": "^1.10.0",
+        "rimraf": "^6.0.1",
+        "typescript": "^5.8.2"
+    },
+    "scripts": {
+        "build": "npm  run  typescript:build",
+        "TypeScript_doc": "--- TypeScript --------------------------------------------------------",
+        "typescript:build": "npm  run  typescript:clean  &&  npm  run  typescript:compile",
+        "typescript:compile": "hereby  typescript_compile",
+        "typescript:compile_tsc": "tsc  --project  ./configs/tsconfig.esm.json",
+        "typescript:clean": "rimraf  ./lib/nodejs",
+        "Test_doc": "--- Test with vitest  -------------------------------------------------------",
+        "test": "npm  run  test:unit",
+        "test:unit": "vitest  --config  ./tests/vitest/vitest.config.ts",
+        "test:coverage": "vitest  --coverage  --config  ./tests/vitest/vitest.config.ts",
+        "The_End": "=============================================================================="
     }
-  ],
-
-  "license": "GNU GENERAL PUBLIC LICENSE v3.0",
-  "bugs": {
-    "url": "https://github.com/jopenbusiness/StockHub/issues"
-  },
-  "homepage": "https://github.com/jopenbusiness/StockHub#readme",
-  "type": "module"
 }

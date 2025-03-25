@@ -1,0 +1,18 @@
+/**
+ * @author gye hyun james kim <pnuskgh@gmail.com>
+ * @copyright 2017~2025, OBCon Inc.
+ * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
+ */
+
+//--- For CommonJS modules
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "lib": [ "ES6", "DOM" ],                            //--- 실행 환경에서 포함할 library declaration files (DOM for Web Browser)
+        "target": "ES6",                                    //--- 생성할 javascript의 버전 (ES6 for cjs, ES2022 for esm)
+        "module": "CommonJS",                               //--- 모듈 형식 (CommonJS for ~.cjs, ES2022 for ~.msj)
+        "moduleResolution": "Node",                         //--- 모듈의 해석 방식을 지정 (Node for cjs, Node for esm)
+        "outDir": "../lib/nodejs/cjs",                      //--- Output folder
+        "declarationDir": "../lib/nodejs/cjs/types"         //--- 생성된 ~.d.ts와 ~.d.ts.map 파일이 저장되는 폴더
+    }
+}
