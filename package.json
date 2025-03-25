@@ -20,7 +20,7 @@
             "url": "https://www.obcon.biz/"
         }
     ],
-    "homepage": "https://github.com/jopenbusiness/StockHub#readme",
+    "homepage": "https://github.com/jopenbusiness/StockHub",
     "bugs": {
         "url": "https://github.com/jopenbusiness/StockHub/issues"
     },
@@ -83,13 +83,20 @@
         "prepack": "npm  run  package:build",
         "package:build": "npm  run  typescript:clean  &&  npm  run  typescript:esm  &&  npm  run  typescript:cjs",
         "Pythone_doc": "--- Python ---------------------------------------------------------------",
-        "zz_python:requirement": "pip  list  &&  pip  freeze  >  requirements.txt",
+        "zz_python:requirement": "pip  list  &&  pip  freeze  >  requirements_all.txt",
         "Python_test_doc": "--- Python Test with pytest  -----------------------------------------",
         "zz_python:test": "python  tests/python/pytest.setup.py  &&  pytest  -v  tests/**/test_*.py",
         "zzpython:test": "pytest  -v  tests/python/test_zztemp.py",
         "python:test": "pytest  -v",
         "Python_lib_doc": "--- Python Library 생성  -----------------------------------------------",
-        "python:package": "reserved",
+        "python:package": "npm  run  python:prepack  &&  npm  run  python:publish",
+        "python:publish": "twine  upload  dist/*",
+        "python:prepack": "npm  run  python:clean  &&  npm  run  python:build",
+        "python:build": "npm  run  python:source  &&  npm  run  python:binary",
+        "python:source": "python  setup.py  sdist",
+        "python:binary": "python  setup.py  bdist_wheel",
+        "python:clean": "rimraf  ./dist  &&  rimraf  ./stockhub.egg-info",
+        "python:install": "pip  install  -r  requirements.txt",
         "ESLint_doc": "--- ESLint, Prettier ------------------------------------------------------",
         "eslint": "eslint  src/nodejs",
         "prettier": "prettier  src/nodejs/**/*",

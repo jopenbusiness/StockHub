@@ -10,9 +10,13 @@ lib/
 built/
 cmd/
 
-#--- TypeScript
+#--- Pythone
 __pycache__/
 .pytest_cache/
+dist/
+stockhub.egg-info/
+
+.pypirc
 
 #--- MacBook
 .DS_Store

@@ -2,7 +2,9 @@
 증권사 Open API Hub 서비스 입니다.
 
 - 홈페이지 : https://invest.bluestones.biz/
-- GitHub : https://www.npmjs.com/package/stockhub
+- GitHub : https://github.com/jopenbusiness/StockHub
+- Node.js : https://www.npmjs.com/package/stockhub, 0.0.1
+- Python : https://pypi.org/project/stockhub/, 0.0.1
 
 ​    
 
@@ -27,6 +29,7 @@
   - TypeScript 5.8.2
 - Python 3.12.9
 
+
   
 
 ## Libraries
@@ -35,7 +38,20 @@
   - JavaScript, Java
 - Python
 
+  
+
+## Node.js에서 사용
+
 ```bash
-#--- Node.js 라이브러리의 버전 확인
-npm  outdated 
+npm  install  stockhub
 ```
+
+  
+
+## Python에서 사용  
+
+```bash
+pip  install  stockhub
+```
+
+  
