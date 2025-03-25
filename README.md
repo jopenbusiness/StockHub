@@ -2,6 +2,7 @@
 증권사 Open API Hub 서비스 입니다.
 
 - 홈페이지 : https://invest.bluestones.biz/
+- GitHub : https://www.npmjs.com/package/stockhub
 
 ​    
 

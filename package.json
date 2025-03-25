@@ -1,12 +1,12 @@
 {
     "name": "stockhub",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "증권사 Open API Hub 서비스",
     "keywords": [
         "Stock",
         "REST",
-        "Open",
-        "API"
+        "Open API",
+        "Hub"
     ],
     "author": {
         "name": "gye hyun james kim",
@@ -25,17 +25,32 @@
         "url": "https://github.com/jopenbusiness/StockHub/issues"
     },
     "license": "GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)",
-    "main": "index.js",
+    "private": false,
+    "main": "./lib/nodejs/esm/index.js",
+    "types": "./lib/nodejs/esm/types/index.d.ts",
+    "files": [
+        "lib/nodejs/**/*"
+    ],
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./lib/nodejs/esm/types/index.d.ts",
+                "default": "./lib/nodejs/esm/index.js"
+            },
+            "require": {
+                "types": "./lib/nodejs/cjs/types/index.d.ts",
+                "default": "./lib/nodejs/cjs/index.js"
+            }
+        }
+    },
+    "man": [
+        "./README.md"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/jopenbusiness/StockHub.git"
     },
     "type": "module",
-    "packageManager": "npm@10.9.2",
-    "volta": {
-        "node": "22.14.0",
-        "npm": "10.9.2"
-    },
     "devDependencies": {
         "eslint": "^9.23.0",
         "eslint-config-prettier": "^10.1.1",
@@ -51,14 +66,25 @@
     "scripts": {
         "build": "npm  outdated  &&  npm  run  typescript:build",
         "TypeScript_doc": "--- TypeScript --------------------------------------------------------",
-        "typescript:build": "npm  run  typescript:clean  &&  npm  run  typescript:compile",
+        "typescript:build": "npm  run  typescript:clean  &&  npm  run  typescript:esm",
         "typescript:compile": "hereby  typescript_compile",
-        "typescript:compile_tsc": "tsc  --project  ./configs/tsconfig.esm.json",
+        "typescript:esm": "hereby  typescript_esm",
+        "typescript:cjs": "hereby  typescript_cjs",
+        "zz_typescript:esm": "hereby  typescript_esm  &&  cp  configs/package.esm.json  lib/nodejs/esm/package.json",
+        "zz_typescript:cjs": "hereby  typescript_cjs  &&  cp  configs/package.cjs.json  lib/nodejs/cjs/package.json",
+        "zz_typescript:esm_tsc": "tsc  --project  ./configs/tsconfig.esm.json",
+        "zz_typescript:esm_cjs": "tsc  --project  ./configs/tsconfig.cjs.json",
         "typescript:clean": "rimraf  ./lib/nodejs",
-        "Test_doc": "--- Test with vitest  -------------------------------------------------------",
+        "TypeScript_test_doc": "--- TypeScript Test with vitest  ---------------------------------",
         "test": "npm  outdated  &&  npm  run  test:unit",
         "test:unit": "vitest  --config  ./tests/vitest/vitest.config.ts",
         "test:coverage": "vitest  --coverage  --config  ./tests/vitest/vitest.config.ts",
+        "TypeScript_lib_docs": "--- TypeScript Library 생성 ---------------------------------------",
+        "package": "npm  publish  --dry-run  &&  npm  run  package:publish",
+        "package:dry": "npm  publish  --dry-run",
+        "package:publish": "npm  publish  --access=public",
+        "prepack": "npm  run  package:build",
+        "package:build": "npm  run  typescript:clean  &&  npm  run  typescript:esm  &&  npm  run  typescript:cjs",
         "ESLint_doc": "--- ESLint, Prettier ------------------------------------------------------",
         "eslint": "eslint  src/nodejs",
         "prettier": "prettier  src/nodejs/**/*",
