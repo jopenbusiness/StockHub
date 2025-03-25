@@ -4,7 +4,12 @@
 
 ## To-Do
 
+- Python 배포시 deprecated된 setuptools 제거
 - 증권사 Open API 샘플 프로그램 제작
+  - 한국투자증권
+  - LS증권
+  - DB증권
+  - 키움증권
 
 
   

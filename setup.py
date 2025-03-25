@@ -9,9 +9,23 @@ from setuptools import setup, find_packages
 
 version = '0.0.1'
 
+def read_file(filename):
+    lines = []
+    with open(filename, 'r') as file:
+        for line in file:
+            lines.append(line)
+    return lines
+
+filename = 'stockhub/__init__.py'
+lines = read_file(filename)
+with open(filename, 'w') as file:
+    for line in lines:
+        if line.startswith('__version__'):
+            file.write(f"__version__ = '{version}'\n")
+        else:
+            file.write(line)
+
 #--- PYPI (Python Package Index)
-#---     https://pypi.org/
-# https://velog.io/@rhee519/python-project-packaging-setuptools
 setup(
     name='stockhub',
     version=version,

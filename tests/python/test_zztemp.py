@@ -5,7 +5,7 @@
 #---    license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
 #===================================================================================================
 
-from src.python.zztemp import hello
+from stockhub.zztemp import hello
 
 def test_hello():    
     assert hello() == 'Hello World!'
