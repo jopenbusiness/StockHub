@@ -40,7 +40,8 @@
         "execa": "^9.5.2",
         "hereby": "^1.10.0",
         "rimraf": "^6.0.1",
-        "typescript": "^5.8.2"
+        "typescript": "^5.8.2",
+        "vitest": "^3.0.9"
     },
     "scripts": {
         "build": "npm  run  typescript:build",
