@@ -1,0 +1,38 @@
+{
+  "name": "stockhub",
+  "version": "1.0.0",
+  "description": "증권사 Open API Hub 서비스",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jopenbusiness/StockHub.git"
+  },
+  "keywords": [
+    "Stock",
+    "REST",
+    "Open",
+    "API"
+  ],
+  "author": {
+    "name": "gye hyun james kim",
+    "email": "pnuskgh@gmail.com",
+    "url": "https://www.obcon.biz/"
+  },
+  "contributors": [
+    {
+      "name": "gye hyun james kim",
+      "email": "pnuskgh@gmail.com",
+      "url": "https://www.obcon.biz/"
+    }
+  ],
+
+  "license": "GNU GENERAL PUBLIC LICENSE v3.0",
+  "bugs": {
+    "url": "https://github.com/jopenbusiness/StockHub/issues"
+  },
+  "homepage": "https://github.com/jopenbusiness/StockHub#readme",
+  "type": "module"
+}
