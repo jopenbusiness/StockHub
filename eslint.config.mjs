@@ -39,7 +39,12 @@ const config = [
             'src/nodejs/**/*.{ts,tsx}',
             'tests/nodejs/**/*.{ts,tsx}',
             'bin/nodejs/**/*.{ts,tsx}',
-            'scripts/nodejs/**/*.{ts,tsx}'
+            'scripts/nodejs/**/*.{ts,tsx}',
+
+            'src/python/**/*.{py}',
+            'tests/python/**/*.{py}',
+            'bin/python/**/*.{py}',
+            'scripts/python/**/*.{py}'
         ]
     },
     {
