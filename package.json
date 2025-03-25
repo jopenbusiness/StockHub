@@ -37,23 +37,31 @@
         "npm": "10.9.2"
     },
     "devDependencies": {
+        "eslint": "^9.23.0",
+        "eslint-config-prettier": "^10.1.1",
+        "eslint-plugin-prettier": "^5.2.4",
         "execa": "^9.5.2",
         "hereby": "^1.10.0",
+        "prettier": "^3.5.3",
         "rimraf": "^6.0.1",
         "typescript": "^5.8.2",
+        "typescript-eslint": "^8.28.0",
         "vitest": "^3.0.9"
     },
     "scripts": {
-        "build": "npm  run  typescript:build",
+        "build": "npm  outdated  &&  npm  run  typescript:build",
         "TypeScript_doc": "--- TypeScript --------------------------------------------------------",
         "typescript:build": "npm  run  typescript:clean  &&  npm  run  typescript:compile",
         "typescript:compile": "hereby  typescript_compile",
         "typescript:compile_tsc": "tsc  --project  ./configs/tsconfig.esm.json",
         "typescript:clean": "rimraf  ./lib/nodejs",
         "Test_doc": "--- Test with vitest  -------------------------------------------------------",
-        "test": "npm  run  test:unit",
+        "test": "npm  outdated  &&  npm  run  test:unit",
         "test:unit": "vitest  --config  ./tests/vitest/vitest.config.ts",
         "test:coverage": "vitest  --coverage  --config  ./tests/vitest/vitest.config.ts",
+        "ESLint_doc": "--- ESLint, Prettier ------------------------------------------------------",
+        "eslint": "eslint  src/nodejs",
+        "prettier": "prettier  src/nodejs/**/*",
         "The_End": "=============================================================================="
     }
 }

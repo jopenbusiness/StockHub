@@ -20,11 +20,19 @@
 
   
 
+## 개발 환경
+
+- Node.js 22.14.0
+  - TypeScript 5.8.2
+- Python 3.12.9
+
+  
+
 ## Libraries
 
-- TypeScript 5.8.2
+- TypeScript
   - JavaScript, Java
-- Python 3.12.9
+- Python
 
 ```bash
 #--- Node.js 라이브러리의 버전 확인
