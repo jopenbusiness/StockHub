@@ -26,20 +26,20 @@
     },
     "license": "GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)",
     "private": false,
-    "main": "./lib/nodejs/esm/index.js",
-    "types": "./lib/nodejs/esm/types/index.d.ts",
+    "main": "./lib/esm/index.js",
+    "types": "./lib/esm/types/index.d.ts",
     "files": [
-        "lib/nodejs/**/*"
+        "lib/**/*"
     ],
     "exports": {
         ".": {
             "import": {
-                "types": "./lib/nodejs/esm/types/index.d.ts",
-                "default": "./lib/nodejs/esm/index.js"
+                "types": "./lib/esm/types/index.d.ts",
+                "default": "./lib/esm/index.js"
             },
             "require": {
-                "types": "./lib/nodejs/cjs/types/index.d.ts",
-                "default": "./lib/nodejs/cjs/index.js"
+                "types": "./lib/cjs/types/index.d.ts",
+                "default": "./lib/cjs/index.js"
             }
         }
     },
@@ -54,7 +54,7 @@
     "devDependencies": {
         "eslint": "^9.23.0",
         "eslint-config-prettier": "^10.1.1",
-        "eslint-plugin-prettier": "^5.2.4",
+        "eslint-plugin-prettier": "^5.2.5",
         "execa": "^9.5.2",
         "hereby": "^1.10.0",
         "prettier": "^3.5.3",
@@ -72,7 +72,7 @@
         "typescript:cjs": "hereby  typescript_cjs",
         "zz_typescript:esm_tsc": "tsc  --project  ./configs/tsconfig.esm.json",
         "zz_typescript:esm_cjs": "tsc  --project  ./configs/tsconfig.cjs.json",
-        "typescript:clean": "rimraf  ./lib/nodejs",
+        "typescript:clean": "rimraf  ./lib",
         "TypeScript_test_doc": "--- TypeScript Test with vitest  ---------------------------------",
         "typescript:test": "vitest  --config  ./tests/vitest/vitest.config.ts",
         "typescript:coverage": "vitest  --coverage  --config  ./tests/vitest/vitest.config.ts",
@@ -98,8 +98,11 @@
         "python:clean": "rimraf  ./dist  &&  rimraf  ./stockhub.egg-info",
         "python:install": "pip  install  -r  requirements.txt",
         "ESLint_doc": "--- ESLint, Prettier ------------------------------------------------------",
-        "eslint": "eslint  src/nodejs",
-        "prettier": "prettier  src/nodejs/**/*",
+        "eslint": "eslint  src",
+        "prettier": "prettier  src/**/*",
         "The_End": "=============================================================================="
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7"
     }
 }

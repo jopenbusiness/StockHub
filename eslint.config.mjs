@@ -36,10 +36,10 @@ const config = [
     },
     {
         files: [ 
-            'src/nodejs/**/*.{ts,tsx}',
-            'tests/nodejs/**/*.{ts,tsx}',
-            'bin/nodejs/**/*.{ts,tsx}',
-            'scripts/nodejs/**/*.{ts,tsx}',
+            'src/**/*.{ts,tsx}',
+            'tests/**/*.{ts,tsx}',
+            'bin/**/*.{ts,tsx}',
+            'scripts/**/*.{ts,tsx}',
 
             'src/python/**/*.{py}',
             'tests/python/**/*.{py}',

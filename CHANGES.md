@@ -21,6 +21,7 @@
 
 ## Version History
 
+- 0.00.007 : 암호화키 관리 구성
 - 0.00.006 : Python 라이브러리 배포 환경 구성
   - Library : setuptools, wheel, twine
 - 0.00.005 : Python 테스트 자동화 환경 구성

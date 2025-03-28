@@ -22,7 +22,7 @@ const makePackageJson = (moduleType) => {
             packageContentNew.push(line);
         }
     });
-    const packageFilenameNew = path.join(rootFolder, 'lib', 'nodejs', moduleType, 'package.json');
+    const packageFilenameNew = path.join(rootFolder, 'lib', moduleType, 'package.json');
     fs.writeFileSync(packageFilenameNew, packageContentNew.join('\n'));
 };
 
