@@ -1,5 +1,5 @@
-# StockHub
-증권사 Open API Hub 서비스 입니다.
+# 증권사 Open API Hub 서비스
+증권사의 REST 기반의 Open API를 사용할 수 있는 라이브러리를 제작 합니다.
 
 - 홈페이지 : https://invest.bluestones.biz/
 - GitHub : https://github.com/jopenbusiness/StockHub
