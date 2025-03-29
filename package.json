@@ -52,6 +52,8 @@
     },
     "type": "module",
     "devDependencies": {
+        "@types/node": "^22.13.14",
+        "dotenv": "^16.4.7",
         "eslint": "^9.23.0",
         "eslint-config-prettier": "^10.1.1",
         "eslint-plugin-prettier": "^5.2.5",
@@ -66,6 +68,7 @@
     "scripts": {
         "build": "npm  outdated  &&  npm  run  typescript:build",
         "test": "npm  outdated  &&  npm  run  typescript:test  &&  npm  run python:test",
+        "installAll": "npm  run  typescript:install  &&  npm  run  python:install",
         "TypeScript_doc": "--- TypeScript --------------------------------------------------------",
         "typescript:build": "npm  run  typescript:clean  &&  npm  run  typescript:esm",
         "typescript:esm": "hereby  typescript_esm",
@@ -73,6 +76,7 @@
         "zz_typescript:esm_tsc": "tsc  --project  ./configs/tsconfig.esm.json",
         "zz_typescript:esm_cjs": "tsc  --project  ./configs/tsconfig.cjs.json",
         "typescript:clean": "rimraf  ./lib",
+        "typescript:install": "npm  install",
         "TypeScript_test_doc": "--- TypeScript Test with vitest  ---------------------------------",
         "typescript:test": "vitest  --config  ./tests/vitest/vitest.config.ts",
         "typescript:coverage": "vitest  --coverage  --config  ./tests/vitest/vitest.config.ts",
@@ -84,6 +88,7 @@
         "package:build": "npm  run  typescript:clean  &&  npm  run  typescript:esm  &&  npm  run  typescript:cjs",
         "Pythone_doc": "--- Python ---------------------------------------------------------------",
         "zz_python:requirement": "pip  list  &&  pip  freeze  >  requirements_all.txt",
+        "python:install": "pip  install  -r  requirements.txt",
         "Python_test_doc": "--- Python Test with pytest  -----------------------------------------",
         "zz_python:test": "python  tests/python/pytest.setup.py  &&  pytest  -v  tests/**/test_*.py",
         "zzpython:test": "pytest  -v  tests/python/test_zztemp.py",
@@ -96,13 +101,9 @@
         "python:source": "python  setup.py  sdist",
         "python:binary": "python  setup.py  bdist_wheel",
         "python:clean": "rimraf  ./dist  &&  rimraf  ./stockhub.egg-info",
-        "python:install": "pip  install  -r  requirements.txt",
         "ESLint_doc": "--- ESLint, Prettier ------------------------------------------------------",
         "eslint": "eslint  src",
         "prettier": "prettier  src/**/*",
         "The_End": "=============================================================================="
-    },
-    "dependencies": {
-        "dotenv": "^16.4.7"
     }
 }
