@@ -21,6 +21,7 @@
 
 ## Version History
 
+- 0.00.008 : 2025-04-04, Open API의 Specification 정의를 위한 type 작성
 - 0.00.007 : 암호화키 관리 구성
 - 0.00.006 : Python 라이브러리 배포 환경 구성
   - Library : setuptools, wheel, twine
