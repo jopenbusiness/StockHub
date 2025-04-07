@@ -6,9 +6,10 @@
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const conf: Record<string, any> = {
+    root: ',/',
     database: {
         type: 'sqlite3',                                    //--- DB 종류 (sqlite3, mysql, mariadb, postgresql)
-        filename: './files/sqlite3/database.db',            //--- DB 파일명
+        filename: 'files/sqlite3/StockHub.db',              //--- DB 파일명
     }
 };
 

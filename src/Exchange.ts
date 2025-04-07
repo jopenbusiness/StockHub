@@ -5,8 +5,9 @@
  */
 
 import { EXCHANGE_INFO } from './Exchange.type.js';
+import { get, run } from './Database.js'; 
 
-const exchangeInfos: Array<EXCHANGE_INFO> = [        //--- 거래소 정보
+const exchangeInfos: Array<EXCHANGE_INFO> = [               //--- 거래소 정보
     {
         guid: '5977df30-138d-11f0-a66e-4bd46a0b0d2d',
         name: '한국투자증권',
@@ -50,6 +51,8 @@ const exchangeInfos: Array<EXCHANGE_INFO> = [        //--- 거래소 정보
 ];
 
 export const getExchange = (guid: string): EXCHANGE_INFO => {
+    //--- pppqqq, Table에서 읽어서 반환
+
     const exchange = exchangeInfos.find((item) => item.guid == guid);
     if (exchange) {
         return exchange;
@@ -58,5 +61,47 @@ export const getExchange = (guid: string): EXCHANGE_INFO => {
     }
 }
 
-//--- Exchange Table 초기화
-//--- pppqqq, SQLite3에 exchangeTable 생성
+const TABLE_NAME: string = 'Exchanges';
+const sqlStockExchange: string = [
+    `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (`,
+    "    id INTEGER PRIMARY KEY AUTOINCREMENT,",
+    "    guid VARCHAR(74) NOT NULL,",
+    "    name VARCHAR(64) NOT NULL DEFAULT ''",
+    "    homepage VARCHAR(128) NOT NULL DEFAULT ''",
+    "    url VARCHAR(128) NOT NULL DEFAULT ''",
+
+    "    domainProduct VARCHAR(128) NOT NULL DEFAULT ''",
+    "    domainDevelop VARCHAR(128) NOT NULL DEFAULT ''",
+    "    wsProduct VARCHAR(128) NOT NULL DEFAULT ''",
+    "    wsDevelop VARCHAR(128) NOT NULL DEFAULT ''",
+
+    "    createdAt DATETIME NOT NULL",
+    "    updatedAt DATETIME NOT NULL",
+    ')'
+].join(' ');
+
+export const initializeDatabase = async (db): Promise<void> => {
+    await run(db, sqlStockExchange);
+
+    exchangeInfos.forEach(async (exchange) => {
+        const query = `INSERT INTO ${TABLE_NAME} (
+            guid, name, homepage, url, 
+            domainProduct, domainDevelop, wsProduct, wsDevelop, 
+            createAt, updatedAt) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        const now = new Date().toISOString();
+        const params: Array<string | number | boolean> = [
+            exchange.guid,
+            exchange.name,
+            exchange.homepage,
+            exchange.url,
+            exchange.domainProduct,
+            exchange.domainDevelop,
+            exchange.wsProduct,
+            exchange.wsDevelop,
+            now,
+            now
+        ]
+        run(db, query, params);
+    }); 
+}

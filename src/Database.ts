@@ -4,16 +4,22 @@
  * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
  */
 
+import fs from 'fs';
+import path from 'path';
 import { Database } from 'sqlite3';                         //--- https://www.npmjs.com/package/sqlite3
+
 import { getConfig } from './Config.js';
 
-//--- pppqqq, Database file 초기화
-
-export const openDatabase = async (): Promise<Database> => {
+const _openDatabase = async (): Promise<Database> => {
     return new Promise((resolve, reject) => {
         try {
-            const databaseInfo = getConfig().database;
-            const db: Database = new Database(databaseInfo.filename, (err) => {
+            const config = getConfig();
+            const filename = path.join(config.root, config.database.filename);
+            const foldername = path.dirname(filename);
+            if (!fs.existsSync(foldername)) {
+                fs.mkdirSync(foldername, { recursive: true });
+            }
+            const db: Database = new Database(filename, (err) => {
                 if (err) {
                     throw new Error(`Error opening database: ${err.message}`);
                 } else {
@@ -26,10 +32,19 @@ export const openDatabase = async (): Promise<Database> => {
     });
 }
 
-export const run = async (db: Database, query: string): Promise<boolean> => {
+export const openDatabase = async (): Promise<Database> => {
+    const db = await _openDatabase();
+    await initializeDatabase(db);
+    return db;
+}
+
+//--- pppqqq
+let database: Database  = await openDatabase();
+
+export const run = async (db: Database, query: string, params: Array<string | number | boolean> = []): Promise<boolean> => {
     return new Promise((resolve, reject) => {
         try {
-            db.run(query, (err) => {
+            db.run(query, params, (err) => {
                 if (err) {
                     console.error('Error creating table:', err.message);
                 } else {
@@ -74,26 +89,8 @@ export const closeDatabase = async (db: Database): Promise<boolean> => {
     });
 }
 
-const sqlStockExchange: string = [
-    "CREATE TABLE IF NOT EXISTS StockExchange (",
-    "    id INTEGER PRIMARY KEY AUTOINCREMENT,",
-    "    guid VARCHAR(74) NOT NULL,",
-    "    name VARCHAR(64) NOT NULL DEFAULT ''",
-    "    homepage VARCHAR(128) NOT NULL DEFAULT ''",
-    "    url VARCHAR(128) NOT NULL DEFAULT ''",
-
-    "    domainProduct VARCHAR(128) NOT NULL DEFAULT ''",
-    "    domainDevelop VARCHAR(128) NOT NULL DEFAULT ''",
-    "    wsProduct VARCHAR(128) NOT NULL DEFAULT ''",
-    "    wsDevelop VARCHAR(128) NOT NULL DEFAULT ''",
-
-    "    createdAt DATETIME NOT NULL",
-    "    updatedAt DATETIME NOT NULL",
-    ')'
-].join(' ');
-
 const sqlStockSpec: string = [
-    "CREATE TABLE IF NOT EXISTS StockSpec (",
+    "CREATE TABLE IF NOT EXISTS Specifications (",
     "    id INTEGER PRIMARY KEY AUTOINCREMENT,",
     "    company VARCHAR(16) NOT NULL,",
     "    category  VARCHAR(64) NOT NULL DEFAULT '',",
