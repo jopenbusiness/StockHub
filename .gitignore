@@ -4,10 +4,10 @@ node_modules/
 .env
 package-lock.json
 
-#--- TypeScript
+#---     TypeScript
 lib/
 
-#--- https://github.com/microsoft/typescript-go
+#---     https://github.com/microsoft/typescript-go
 built/
 cmd/
 
@@ -23,3 +23,8 @@ stockhub.egg-info/
 .DS_Store
 
 zz*
+
+#--- Windows
+
+#--- StockHub
+files/

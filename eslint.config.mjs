@@ -53,7 +53,12 @@ const config = [
         },
     },
     pluginJs.configs.recommended,                           //--- ESLint의 권장 설정
-    ...tseslint.configs.recommended                         //--- TypeScript의 권장 설정
+    ...tseslint.configs.recommended,                        //--- TypeScript의 권장 설정
+    // {
+    //     rules: {
+    //         "@typescript-eslint/no-explicit-any": "off"
+    //     }
+    // }
 ];
 // console.log('globals.browser', globals.browser);
 // console.log('pluginJs.configs.recommended', pluginJs.configs.recommended);

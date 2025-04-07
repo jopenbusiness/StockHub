@@ -8,7 +8,7 @@
 - invest.bluestones.biz
   - 증권 Open API의 Spec.을 반환하는 프로그램 제작
   - 증권 Open API의 Spec.을 표시
-    - Swagger, JSON, HTML, SQLite3
+    - Swagger, JSON, SQLite3
   - 증권 Open API의 Spec. 오류 신고 페이지 제작
 - 증권사 Open API 샘플 프로그램 제작
   - 한국투자증권
