@@ -5,7 +5,6 @@
  */
 
 import { PrismaClient } from '@prisma/client'
-// import { PrismaClient } from '../generated/prisma/index.js';
 
 import { EXCHANGE_INFO } from './Exchange.type.js';
 
@@ -56,8 +55,6 @@ let isInitialized: boolean = false;
 const initializeExchange = async (): Promise<void> => {
     if (isInitialized == false) {
         isInitialized = true;
-        // Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
-
         const prisma = new PrismaClient();
 
         try {
@@ -82,11 +79,11 @@ export const getExchange = async (guid: string): Promise<EXCHANGE_INFO | undefin
     const prisma = new PrismaClient();
 
     try {
-        exchange = await prisma.exchanges.findFirst({
+        exchange = (await prisma.exchanges.findFirst({
             where: {
                 guid: guid
             }
-        });
+        })) as EXCHANGE_INFO;
     } catch (error) {
         console.error('Error getting exchange:', error);
     } finally {

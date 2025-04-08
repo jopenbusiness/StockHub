@@ -21,6 +21,7 @@
 
 ## Version History
 
+- 0.00.011 : 2025-04-08, Exchange table 관리 모듈 제작
 - 0.00.010 : 2025-04-08, Prisma 데이터베이스 관리 환경 구성
 - 0.00.009 : 2025-04-08, 설정 관리(Config.ts) 기능 제작
 - 0.00.008 : 2025-04-04, Open API의 Specification 정의를 위한 type 작성
