@@ -22,22 +22,22 @@ type EXCHANGE_URL =
     'https://openapi.dbsec.co.kr/apiservice' | 
     'https://openapi.kiwoom.com/guide/apiguide';
 
-type EXCHANGE_DOMAIN_PRODUCT = 
+export type EXCHANGE_DOMAIN_PRODUCT = 
     'https://openapi.koreainvestment.com:9443' |
     'https://openapi.ls-sec.co.kr:8080' |
     'https://openapi.dbsec.co.kr:8443' |
     'https://api.kiwoom.com';
-type EXCHANGE_DOMAIN_DEVELOP = 
+export type EXCHANGE_DOMAIN_DEVELOP = 
     'https://openapivts.koreainvestment.com:29443' |
     '' |
     '' |
     'https://mockapi.kiwoom.com';
-type EXCHANGE_WS_PRODUCT = 
+export type EXCHANGE_WS_PRODUCT = 
     'ws://ops.koreainvestment.com:21000' |
     'wss://openapi.ls-sec.co.kr:9443' |
     'wss://openapi.dbsec.co.kr:7070' |
     'wss://api.kiwoom.com:10000';
-type EXCHANGE_WS_DEVELOP = 
+export type EXCHANGE_WS_DEVELOP = 
     'ws://ops.koreainvestment.com:31000' |
     'wss://openapi.ls-sec.co.kr:29443' |
     'wss://openapi.dbsec.co.kr:17070' |

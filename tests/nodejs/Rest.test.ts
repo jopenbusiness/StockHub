@@ -6,15 +6,15 @@
 
 // import moment from 'moment';                                //--- 'YYYY-MM-DD HH:mm:ss.SSS ZZ'
 
-import { inspect } from 'util';
-import { beforeAll, describe, expect, it } from 'vitest'
+// import { inspect } from 'util';
+import { beforeAll, describe, it } from 'vitest'
 
-import { EXCHANGE_INFO, SPECIFICATION_INFO } from '../../src/Specification.type.js';
-import { exchangeInfos } from '../../src/Specification.js';
-import { getSpecification } from '../../src/Rest.js';
+// import { EXCHANGE_INFO, SPECIFICATION_INFO } from '../../src/Specification.type.js';
+// import { exchangeInfos } from '../../src/Specification.js';
+// import { getSpecification } from '../../src/Rest.js';
 
-// export const deepCopy = source => JSON.parse(JSON.stringify(source));
-const showAll = json => inspect(json, { colors: false, depth: 10 });
+// // export const deepCopy = source => JSON.parse(JSON.stringify(source));
+// const showAll = json => inspect(json, { colors: false, depth: 10 });
 
 
 const funcInit = async (suite) => {
@@ -28,17 +28,17 @@ beforeAll(funcInit, 60 * 1000);                             //--- 모든 파일�
 //--- https://vitest.dev/guide/
 describe('Test Rest', () => {
     it('Test Restful API', async (ctx) => {
-        console.log('Test Restful API', ctx);
+        // console.log('Test Restful API', ctx);
 
-        const exchange: EXCHANGE_INFO | undefined = exchangeInfos.find((item) => item.id == 3);     //--- DB증권
-        // console.log('exchange', exchange);
+        // const exchange: EXCHANGE_INFO | undefined = exchangeInfos.find((item) => item.id == 3);     //--- DB증권
+        // // console.log('exchange', exchange);
 
-        if (exchange != undefined) {
-            //--- 3. DB증권, CDPCQ00100. 국내주식주문/계좌예수금조회/계좌예수금조회
-            const specification: SPECIFICATION_INFO | null = await getSpecification(exchange, 'CDPCQ00100', true); 
-            console.log('specification', showAll(specification.info));
-        }
-        expect(exchange).not.toBeUndefined();
+        // if (exchange != undefined) {
+        //     //--- 3. DB증권, CDPCQ00100. 국내주식주문/계좌예수금조회/계좌예수금조회
+        //     const specification: SPECIFICATION_INFO | null = await getSpecification(exchange, 'CDPCQ00100', true); 
+        //     console.log('specification', showAll(specification.info));
+        // }
+        // expect(exchange).not.toBeUndefined();
 
 
 

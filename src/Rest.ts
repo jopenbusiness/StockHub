@@ -9,7 +9,8 @@
 import { Database } from 'sqlite3';                         //--- https://www.npmjs.com/package/sqlite3
 
 import { EXCHANGE_INFO } from './Exchange.type.js';
-import { SECRET_INFO, SPECIFICATION_INFO } from './Specification.type.js';
+import { SECRET_INFO } from './Secret.type.js';
+import { SPECIFICATION_INFO } from './Specification.type.js';
 // import { exchangeInfos } from './Specification.js';
 import { RETURN_INFO } from './Rest.type.js';
 
@@ -34,6 +35,7 @@ import { RETURN_INFO } from './Rest.type.js';
 export const getSpecification = (exchange: EXCHANGE_INFO, trid: string, isProduct: boolean = true): Promise<SPECIFICATION_INFO> => {
     return new Promise((resolve, reject) => {
         try {
+            
             //--- TODO: 라이브러리로 배포 후, 폴더 위치가 정상 동작하는지 확인
             const databaseFilename = './files/sqlite3/database.db';
             const db: Database = new Database(databaseFilename, (err) => {
@@ -100,6 +102,16 @@ export const getSpecification = (exchange: EXCHANGE_INFO, trid: string, isProduc
 export const request = async (secret: SECRET_INFO, trid: string, requestHeader: any, requestBody: any, responsePrev: any | null): Promise<RETURN_INFO> => {
     const ret: RETURN_INFO = { code: 0, message: 'ok', data: null, error: null };
     try {
+        //--- pppqqq, 여기서 부터 작업할 것
+        //--- Secret가 db에 없으면 등록
+        //--- Secret에 인증 정보가 없으면 생성
+
+        //--- Specification 정보가 있는지 확인
+        //---     없는 경우, Specification 정보를 가져오기
+
+
+
+
         //--- 인증 정보가 있는지 확인
         //---     없는 경우, 인증 정보를 가져오기
 

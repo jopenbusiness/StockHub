@@ -4,52 +4,10 @@
  * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
  */
 
-type SECRET_TYPE = '개인' | '법인';
-type GRANT_TYPE = 'client_credentials';
-
-export interface SECRET_INFO {                              //--- 사용자 Open API 접속 정보
-    id?: number,
-    name: string
-    exchangeId: number,                                     //--- 거래소 ID
-    userId: string,                                         //--- 사용자 ID
-    userType: SECRET_TYPE,                                  //--- 사용자 구분
-    account: string,                                        //--- 종합계좌번호
-    accountSub: string,                                     //--- 계좌상품번호
-
-    grantType: GRANT_TYPE,                                  //--- 인증방식
-    appKey: string,                                         //--- App Key
-    appSecret: string,                                      //--- App Secret       
-    periodFrom: string,                                     //--- 유효기간 시작일 (YYYY-MM-DD)
-    periodTo: string,                                       //--- 유효기간 종료일 (YYYY-MM-DD)
-
-    isProduct: boolean,
-    token?: TOKEN_INFO,                                     //--- Token 정보
-    approval?: APPROVAL_INFO                                //--- Web Socket 접속키 정보
-};
-
-type TOKEN_SCOPE = '' | 'oob';
-type TOKEN_TYPE = 'Bearer';
-type TOKEN_TYPE_HINT = '' | 'access_token' | 'refresh_token';
-
-export interface TOKEN_INFO {
-    id?: number,
-    secret: number,
-
-    accessToken: string,                                    //--- 접근 토큰
-    scope: TOKEN_SCOPE,                                     //--- 적용 범위
-    tokenType: TOKEN_TYPE,                                  //--- 토큰 타입
-    tokenTypeHint: TOKEN_TYPE_HINT,                         //--- 토큰 타입 힌트
-    expiresIn: number,                                      //--- 유효 기간 (초)
-    periedFrom: string,                                     //--- 유효기간 시작일시 (YYYY-MM-DD HH:mm:ss)
-    periedTo: string,                                       //--- 유효기간 종료일시 (YYYY-MM-DD HH:mm:ss)
-    isRevoked: boolean                                      //--- 토큰 해지 여부
-};
-
-export interface APPROVAL_INFO {
-    id?: number,
-    secret: number,
-    approvalKey: string,                                    //--- Web Socket 접속키
-};
+import { 
+    EXCHANGE_DOMAIN_PRODUCT, EXCHANGE_DOMAIN_DEVELOP, 
+    EXCHANGE_WS_PRODUCT, EXCHANGE_WS_DEVELOP 
+} from './Exchange.type.js';
 
 type SPEC_METHOD = 'get' | 'post';
 type SPEC_FORMAT = 'json';
@@ -81,7 +39,6 @@ interface SPEC_FIELD_ENUM {
     code: string,
     name: string
 }
-
 interface SPEC_FIELD {
     code: string,
     name: string,
@@ -99,6 +56,17 @@ export interface SPECIFICATION_INFO {
     id?: number,
     exchange: number,                                       //--- 거래소 ID
 
+    category: string,                                       //--- 대분류
+    subCategory: string,                                    //--- 중분류
+    name: string,                                           //--- 이름
+
+    trid: string,                                           //--- TR ID
+    isProduct: boolean,                                     //--- 실전 투자 여부 (true: 실전투자, false: 모의투자)
+
+    downloadDate: string,                                   //--- 수집일 (YYYY-MM-DD)
+    verifyDate: string,                                     //--- 검증일 (YYYY-MM-DD)
+    processCount: number,                                   //--- 처리건수
+
     info: SPEC_INFO,
     request: {
         header: Array<SPEC_FIELD>,
@@ -107,8 +75,15 @@ export interface SPECIFICATION_INFO {
     response: {
         header: Array<SPEC_FIELD>,
         body: Array<SPEC_FIELD>
-    }
+    },
+    json?: string
 };
+
+
+  
+
+
+
 
 // interface REQUEST_HEADER {
 //     'content-type': SPEC_CONTENT_TYPE,

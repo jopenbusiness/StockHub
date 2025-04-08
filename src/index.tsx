@@ -10,12 +10,8 @@ export * from './Config.js';
 export * from './Exchange.type.js';
 export * from './Exchange.js';
 
+export * from './Specification.type.js';
+export * from './Specification.js';
 
-
-// export * from './Database.js'
-
-
-
-// export * from './Specification.type.js';
-
-// export * from './Rest.js';
+export * from './Rest.type.js';
+export * from './Rest.js';
