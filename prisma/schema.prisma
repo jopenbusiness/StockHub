@@ -5,14 +5,14 @@
  */
 //--- https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
-}
-
 datasource db {
   provider = "sqlite"
   url      = "file:../files/sqlite3/StockHub.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
 }
 
 model Exchanges {                                           //--- 거래소 정보
@@ -38,11 +38,10 @@ model Secrets {                                             //--- 거래소 접�
 
   name              String                                  //--- 이름
   userId            String                                  //--- 사용자 ID
-  userType          String                                  //--- 사용자 구분 (P. 개인, B. 법인)
+  userType          String  @default("P")                   //--- 사용자 구분 (P. 개인, B. 법인)
   account           String                                  //--- 종합계좌번호
   accountSub        String                                  //--- 계좌상품번호
-  custtype          String                                  //--- 사용자 구분 (P. 개인, b. 법인)
-  feeType           String                                  //--- 수수료 타입 (뱅키스, 영업점, 패밀리, ISA)
+  feeType           String?                                 //--- 수수료 타입 (뱅키스, 영업점, 패밀리, ISA)
 
   grantType         String  @default("client_credentials")  //--- 인증방식
   appKey            String                                  //--- App Key

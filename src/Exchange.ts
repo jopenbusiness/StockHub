@@ -4,8 +4,10 @@
  * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
  */
 
+import { PrismaClient } from '@prisma/client'
+// import { PrismaClient } from '../generated/prisma/index.js';
+
 import { EXCHANGE_INFO } from './Exchange.type.js';
-import { get, run } from './Database.js'; 
 
 const exchangeInfos: Array<EXCHANGE_INFO> = [               //--- 거래소 정보
     {
@@ -50,58 +52,45 @@ const exchangeInfos: Array<EXCHANGE_INFO> = [               //--- 거래소 정�
     }
 ];
 
-export const getExchange = (guid: string): EXCHANGE_INFO => {
-    //--- pppqqq, Table에서 읽어서 반환
+let isInitialized: boolean = false;
+const initializeExchange = async (): Promise<void> => {
+    if (isInitialized == false) {
+        isInitialized = true;
+        // Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
 
-    const exchange = exchangeInfos.find((item) => item.guid == guid);
-    if (exchange) {
-        return exchange;
-    } else {
-        throw new Error('Exchange not found');
+        const prisma = new PrismaClient();
+
+        try {
+            const exchanges = await prisma.exchanges.findMany();
+            if (exchanges.length < exchangeInfos.length) {
+                await prisma.exchanges.createMany({
+                    data: exchangeInfos
+                });
+            }
+        } catch (error) {
+            console.error('Error initializing exchanges:', error);
+        } finally {
+            await prisma.$disconnect();
+        }
     }
-}
+};
 
-const TABLE_NAME: string = 'Exchanges';
-const sqlStockExchange: string = [
-    `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (`,
-    "    id INTEGER PRIMARY KEY AUTOINCREMENT,",
-    "    guid VARCHAR(74) NOT NULL,",
-    "    name VARCHAR(64) NOT NULL DEFAULT ''",
-    "    homepage VARCHAR(128) NOT NULL DEFAULT ''",
-    "    url VARCHAR(128) NOT NULL DEFAULT ''",
+await initializeExchange();
 
-    "    domainProduct VARCHAR(128) NOT NULL DEFAULT ''",
-    "    domainDevelop VARCHAR(128) NOT NULL DEFAULT ''",
-    "    wsProduct VARCHAR(128) NOT NULL DEFAULT ''",
-    "    wsDevelop VARCHAR(128) NOT NULL DEFAULT ''",
+export const getExchange = async (guid: string): Promise<EXCHANGE_INFO | undefined> => {
+    let exchange: EXCHANGE_INFO | undefined = undefined;
+    const prisma = new PrismaClient();
 
-    "    createdAt DATETIME NOT NULL",
-    "    updatedAt DATETIME NOT NULL",
-    ')'
-].join(' ');
-
-export const initializeDatabase = async (db): Promise<void> => {
-    await run(db, sqlStockExchange);
-
-    exchangeInfos.forEach(async (exchange) => {
-        const query = `INSERT INTO ${TABLE_NAME} (
-            guid, name, homepage, url, 
-            domainProduct, domainDevelop, wsProduct, wsDevelop, 
-            createAt, updatedAt) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-        const now = new Date().toISOString();
-        const params: Array<string | number | boolean> = [
-            exchange.guid,
-            exchange.name,
-            exchange.homepage,
-            exchange.url,
-            exchange.domainProduct,
-            exchange.domainDevelop,
-            exchange.wsProduct,
-            exchange.wsDevelop,
-            now,
-            now
-        ]
-        run(db, query, params);
-    }); 
+    try {
+        exchange = await prisma.exchanges.findFirst({
+            where: {
+                guid: guid
+            }
+        });
+    } catch (error) {
+        console.error('Error getting exchange:', error);
+    } finally {
+        await prisma.$disconnect();
+    }
+    return exchange;
 }

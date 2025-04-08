@@ -10,7 +10,7 @@ import { Database } from 'sqlite3';                         //--- https://www.np
 
 import { EXCHANGE_INFO } from './Exchange.type.js';
 import { SECRET_INFO, SPECIFICATION_INFO } from './Specification.type.js';
-import { exchangeInfos } from './Specification.js';
+// import { exchangeInfos } from './Specification.js';
 import { RETURN_INFO } from './Rest.type.js';
 
 
