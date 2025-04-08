@@ -52,6 +52,7 @@
     },
     "type": "module",
     "dependencies": {
+        "@prisma/client": "^6.5.0",
         "sqlite3": "^5.1.7"
     },
     "devDependencies": {
@@ -63,6 +64,7 @@
         "execa": "^9.5.2",
         "hereby": "^1.10.0",
         "prettier": "^3.5.3",
+        "prisma": "^6.5.0",
         "rimraf": "^6.0.1",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.29.0",
@@ -104,6 +106,11 @@
         "python:source": "python  setup.py  sdist",
         "python:binary": "python  setup.py  bdist_wheel",
         "python:clean": "rimraf  ./dist  &&  rimraf  ./stockhub.egg-info",
+        "Database_doc": "--- ESLint, Prettier ----------------------------------------------------",
+        "prisma:reset": "prisma  migrate  dev",
+        "prisma:generate": "prisma  generate",
+        "prisma:db:push": "prisma  db  push",
+        "prisma:db:pull": "prisma  db  pull",
         "ESLint_doc": "--- ESLint, Prettier ------------------------------------------------------",
         "eslint": "eslint  src",
         "prettier": "prettier  src/**/*",

@@ -10,7 +10,7 @@ type GRANT_TYPE = 'client_credentials';
 export interface SECRET_INFO {                              //--- 사용자 Open API 접속 정보
     id?: number,
     name: string
-    exchange: number,                                       //--- 거래소 ID
+    exchangeId: number,                                     //--- 거래소 ID
     userId: string,                                         //--- 사용자 ID
     userType: SECRET_TYPE,                                  //--- 사용자 구분
     account: string,                                        //--- 종합계좌번호

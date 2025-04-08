@@ -1,0 +1,92 @@
+/**
+ * @author gye hyun james kim <pnuskgh@gmail.com>
+ * @copyright 2017~2025, OBCon Inc.
+ * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
+ */
+//--- https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../files/sqlite3/StockHub.db"
+}
+
+model Exchanges {                                           //--- 거래소 정보
+  id                Int       @id @default(autoincrement())
+  guid              String    @unique                       //--- 거래소 GUID
+  name              String                                  //--- 이름
+  homepage          String                                  //--- 홈페이지
+  url               String                                  //--- Specification URL
+
+  domainProduct     String
+  domainDevelop     String
+  wsProduct         String
+  wsDevelop         String
+
+  secrets           Secrets[]
+  specifications    Specifications[]
+}
+
+model Secrets {                                             //--- 거래소 접속 정보
+  id                Int       @id @default(autoincrement())
+  exchange          Exchanges @relation(fields: [exchangeId], references: [id])
+  exchangeId        Int
+
+  name              String                                  //--- 이름
+  userId            String                                  //--- 사용자 ID
+  userType          String                                  //--- 사용자 구분 (P. 개인, B. 법인)
+  account           String                                  //--- 종합계좌번호
+  accountSub        String                                  //--- 계좌상품번호
+  custtype          String                                  //--- 사용자 구분 (P. 개인, b. 법인)
+  feeType           String                                  //--- 수수료 타입 (뱅키스, 영업점, 패밀리, ISA)
+
+  grantType         String  @default("client_credentials")  //--- 인증방식
+  appKey            String                                  //--- App Key
+  appSecret         String                                  //--- App Secret
+  periodFrom        String                                  //--- 유효기간 시작일 (YYYY-MM-DD)
+  periodTo          String                                  //--- 유효기간 종료일 (YYYY-MM-DD)
+
+  accessToken       String?                                 //--- 접근 토큰
+  scope             String?                                 //--- 접근 토큰 적용 범위
+  tokenType         String?                                 //--- 접근 토큰 유형
+  tokenTypeHint     String?                                 //--- 접근 토큰 힌트
+  expiresIn         Int?                                    //--- 접근 토큰 유효기간
+  periedFrom        String?                                 //--- 접근 토큰 유효기간 시작일시 (YYYY-MM-DD HH:mm:ss)
+  periedTo          String?                                 //--- 접근 토큰 유효기간 종료일시 (YYYY-MM-DD HH:mm:ss)
+  isRevoked         Boolean?                                //--- 접근 토큰 해지 여부
+
+  approvalKey      String?                                  //--- WebSocket 접속키
+  approvalKeyExpired String?                                //--- WebSocket 접속키의 마감일시 (YYYY-MM-DD HH:mm:ss)
+
+  isProduct         Boolean   @default(true)                //--- 실전 투자 여부 (true: 실전투자, false: 모의투자)
+  isActive          Boolean   @default(true)                //--- 활성 여부
+
+  json              Json                                    //--- JSON 데이터
+}
+
+model Specifications {                                      //--- 증권사별 Open API 스펙
+  id                Int       @id @default(autoincrement())
+  exchange          Exchanges @relation(fields: [exchangeId], references: [id])
+  exchangeId        Int
+
+  category          String                                  //--- 대분류
+  subCategory       String                                  //--- 중분류
+  name              String                                  //--- 이름
+
+  trid              String                                  //--- TR ID
+  isProduct         Boolean   @default(true)                //--- 실전 투자 여부 (true: 실전투자, false: 모의투자)
+
+  downloadDate      String                                  //--- 수집일 (YYYY-MM-DD)
+  verifyDate        String                                  //--- 검증일 (YYYY-MM-DD)
+  processCount      Int       @default(0)                   //--- 처리건수
+
+  info              Json                                    //--- JSON 데이터
+  request           Json                                    //--- Request JSON 데이터
+  response          Json                                    //--- Response JSON 데이터
+
+  json              Json                                    //--- JSON 데이터
+}

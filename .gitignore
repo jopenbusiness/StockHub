@@ -27,4 +27,5 @@ zz*
 #--- Windows
 
 #--- StockHub
-files/
+generated/prisma/
+prisma/migrations/
