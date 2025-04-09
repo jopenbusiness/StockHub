@@ -52,7 +52,7 @@
     },
     "type": "module",
     "dependencies": {
-        "@prisma/client": "^6.5.0",
+        "@prisma/client": "^6.6.0",
         "moment": "^2.30.1",
         "sqlite3": "^5.1.7"
     },
@@ -65,7 +65,7 @@
         "execa": "^9.5.2",
         "hereby": "^1.10.0",
         "prettier": "^3.5.3",
-        "prisma": "^6.5.0",
+        "prisma": "^6.6.0",
         "rimraf": "^6.0.1",
         "tsx": "^4.19.3",
         "typescript": "^5.8.3",
