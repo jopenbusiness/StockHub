@@ -5,6 +5,7 @@
  */
 //--- https://pris.ly/d/prisma-schema
 
+// npm  run  prisma:reset
 datasource db {
   provider = "sqlite"
   url      = "file:../files/sqlite3/StockHub.db"
@@ -53,8 +54,8 @@ model Secrets {                                             //--- 거래소 접�
   tokenType         String?                                 //--- 접근 토큰 유형
   tokenTypeHint     String?                                 //--- 접근 토큰 힌트
   expiresIn         Int?                                    //--- 접근 토큰 유효기간
-  periedFrom        String?                                 //--- 접근 토큰 유효기간 시작일시 (YYYY-MM-DD HH:mm:ss)
-  periedTo          String?                                 //--- 접근 토큰 유효기간 종료일시 (YYYY-MM-DD HH:mm:ss)
+  tokenPeriodFrom   String?                                 //--- 접근 토큰 유효기간 시작일시 (YYYY-MM-DD HH:mm:ss)
+  tokenPeriodTo     String?                                 //--- 접근 토큰 유효기간 종료일시 (YYYY-MM-DD HH:mm:ss)
   isRevoked         Boolean?                                //--- 접근 토큰 해지 여부
 
   approvalKey      String?                                  //--- WebSocket 접속키

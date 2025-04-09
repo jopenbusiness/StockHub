@@ -4,7 +4,7 @@
  * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
  */
 
-type USER_TYPE = 'P' | 'B';                                 //--- 사용자 구분 (P: 개인, B: 법인)
+export type USER_TYPE = '개인' | '법인';                     //--- 사용자 구분 (P: 개인, B: 법인)
 type GRANT_TYPE = 'client_credentials';
 
 type TOKEN_SCOPE = '' | 'oob';
@@ -33,8 +33,8 @@ export interface SECRET_INFO {                              //--- 사용자 Open
     tokenType?: TOKEN_TYPE,                                 //--- 토큰 타입
     tokenTypeHint?: TOKEN_TYPE_HINT,                        //--- 토큰 타입 힌트
     expiresIn?: number,                                     //--- 유효 기간 (초)
-    periedFrom?: string,                                    //--- 유효기간 시작일시 (YYYY-MM-DD HH:mm:ss)
-    periedTo?: string,                                      //--- 유효기간 종료일시 (YYYY-MM-DD HH:mm:ss)
+    tokenPeriodFrom?: string,                               //--- 유효기간 시작일시 (YYYY-MM-DD HH:mm:ss)
+    tokenPeriodTo?: string,                                 //--- 유효기간 종료일시 (YYYY-MM-DD HH:mm:ss)
     isRevoked?: boolean                                     //--- 토큰 해지 여부
 
     approvalKey?: string,                                   //--- Web Socket 접속키
@@ -45,3 +45,8 @@ export interface SECRET_INFO {                              //--- 사용자 Open
     
     json?: string
 };
+
+export interface REQUIRE_RESULT {
+    token: boolean,                                         //--- 토큰 재발급 여부
+    approval: boolean                                       //--- 승인 재발급 여부
+}

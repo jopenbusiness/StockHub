@@ -55,7 +55,7 @@ let isInitialized: boolean = false;
 const initializeExchange = async (): Promise<void> => {
     if (isInitialized == false) {
         isInitialized = true;
-        const prisma = new PrismaClient();
+        const prisma: PrismaClient = new PrismaClient();
 
         try {
             const exchanges = await prisma.exchanges.findMany();
@@ -74,15 +74,28 @@ const initializeExchange = async (): Promise<void> => {
 
 await initializeExchange();
 
-export const getExchange = async (guid: string): Promise<EXCHANGE_INFO | undefined> => {
+export const findExchanges = async (): Promise<Array<EXCHANGE_INFO>> => {
+    let exchanges: Array<EXCHANGE_INFO> = [];
+    const prisma: PrismaClient = new PrismaClient();
+
+    try {
+        exchanges = await prisma.exchanges.findMany() as Array<EXCHANGE_INFO>;
+    } catch (error) {
+        console.error('Error getting exchange:', error);
+    } finally {
+        await prisma.$disconnect();
+    }
+    return exchanges;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const _findExchange = async (where: Record<string, any>): Promise<EXCHANGE_INFO | undefined> => {
     let exchange: EXCHANGE_INFO | undefined = undefined;
-    const prisma = new PrismaClient();
+    const prisma: PrismaClient = new PrismaClient();
 
     try {
         exchange = (await prisma.exchanges.findFirst({
-            where: {
-                guid: guid
-            }
+            where: where
         })) as EXCHANGE_INFO;
     } catch (error) {
         console.error('Error getting exchange:', error);
@@ -90,4 +103,12 @@ export const getExchange = async (guid: string): Promise<EXCHANGE_INFO | undefin
         await prisma.$disconnect();
     }
     return exchange;
+}
+
+export const findExchange = async (id: number): Promise<EXCHANGE_INFO | undefined> => {
+    return await _findExchange({ id: id });
+}
+
+export const findExchangeByGuid = async (guid: string): Promise<EXCHANGE_INFO | undefined> => {
+    return await _findExchange({ guid: guid });
 }
