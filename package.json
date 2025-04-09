@@ -73,9 +73,9 @@
         "vitest": "^3.1.1"
     },
     "scripts": {
-        "build": "npm  outdated  &&  npm  run  typescript:build",
-        "test": "npm  outdated  &&  npm  run  typescript:test  &&  npm  run python:test",
-        "installAll": "npm  run  typescript:install  &&  npm  run  python:install",
+        "build": "npm  run  typescript:build",
+        "test": "npm  run  typescript:test  &&  npm  run python:test",
+        "reset": "npm  outdated  npm  run  typescript:install  &&  npm  run  python:install  &&  npm  run  prisma:reset",
         "TypeScript_doc": "--- TypeScript --------------------------------------------------------",
         "typescript:build": "npm  run  typescript:clean  &&  npm  run  typescript:esm",
         "typescript:esm": "hereby  typescript_esm",
