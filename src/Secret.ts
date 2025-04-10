@@ -5,30 +5,29 @@
  */
 
 import moment from 'moment';                                //--- 'YYYY-MM-DD HH:mm:ss.SSS ZZ'
-import { Prisma, PrismaClient } from '@prisma/client'
+import { Prisma } from '@prisma/client';
 
+import { getDatabase } from './Database.js';
 import { findExchange } from './Exchange.js';
 import { REQUIRE_RESULT, SECRET_INFO } from './Secret.type.js';
 
 export const findSecrets = async (): Promise<Array<SECRET_INFO>> => {
     let secrets: Array<SECRET_INFO> = [];
-    const prisma: PrismaClient = new PrismaClient();
 
     try {
+        const prisma = getDatabase();
         secrets = (await prisma.secrets.findMany()) as Array<SECRET_INFO>;
     } catch (error) {
         console.error('Error getting secrets:', error);
-    } finally {
-        await prisma.$disconnect();
     }
     return secrets;
 }
 
 const findSecret = async (id: number): Promise<SECRET_INFO | undefined> => {
     let secret: SECRET_INFO | undefined = undefined;
-    const prisma: PrismaClient = new PrismaClient();
 
     try {
+        const prisma = getDatabase();
         const result = await prisma.secrets.findFirst({
             where: {
                 id: id
@@ -37,8 +36,6 @@ const findSecret = async (id: number): Promise<SECRET_INFO | undefined> => {
         secret = (result) ? result as SECRET_INFO : undefined;
     } catch (error) {
         console.error('Error getting secret:', error);
-    } finally {
-        await prisma.$disconnect();
     }
     return secret;
 }
@@ -46,9 +43,9 @@ const findSecret = async (id: number): Promise<SECRET_INFO | undefined> => {
 // // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // const findSecretByAccount = async (account: string, accountSub: string): Promise<SECRET_INFO | undefined> => {
 //     let secret: SECRET_INFO | undefined = undefined;
-//     const prisma = new PrismaClient();
 
 //     try {
+//         const prisma = getDatabase();
 //         const result = await prisma.secrets.findFirst({
 //             where: {
 //                 account: account,
@@ -58,16 +55,13 @@ const findSecret = async (id: number): Promise<SECRET_INFO | undefined> => {
 //         secret = (result) ? result as SECRET_INFO : undefined;
 //     } catch (error) {
 //         console.error('Error getting secret:', error);
-//     } finally {
-//         await prisma.$disconnect();
 //     }
 //     return secret;
 // }
 
 export const createSecret = async (item: SECRET_INFO): Promise<SECRET_INFO | undefined> => {
-    const prisma: PrismaClient = new PrismaClient();
-
     try {
+        const prisma = getDatabase();
         const secret: SECRET_INFO = (await prisma.secrets.create({
             data: {
                 ...item,
@@ -77,8 +71,6 @@ export const createSecret = async (item: SECRET_INFO): Promise<SECRET_INFO | und
         return secret;
     } catch (error) {
         console.error('Error getting secret:', error);
-    } finally {
-        await prisma.$disconnect();
     }
     return undefined;
 }
@@ -105,7 +97,7 @@ export const isRequireReset = async (secret: SECRET_INFO): Promise<REQUIRE_RESUL
         }
     }
     return result;
-};
+}
 
 export const resetSecret = async (item: SECRET_INFO): Promise<SECRET_INFO | undefined> => {
     let secret: SECRET_INFO | undefined = undefined;
@@ -139,13 +131,10 @@ export const resetSecret = async (item: SECRET_INFO): Promise<SECRET_INFO | unde
 
 
 
-    // // const prisma: PrismaClient = new PrismaClient();
-
+ 
     // // try {
     // // } catch (error) {
     // //     console.error('Error getting secret:', error);
-    // // } finally {
-    // //     await prisma.$disconnect();
     // // }
     return secret;    
 }

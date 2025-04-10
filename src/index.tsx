@@ -4,6 +4,8 @@
  * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
  */
 
+export * from './Database.js';
+
 export * from './Config.type.js';
 export * from './Config.js';
 

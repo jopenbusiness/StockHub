@@ -4,8 +4,7 @@
  * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
  */
 
-import { PrismaClient } from '@prisma/client'
-
+import { getDatabase } from './Database.js';
 import { EXCHANGE_INFO } from './Exchange.type.js';
 
 const exchangeInfos: Array<EXCHANGE_INFO> = [               //--- 거래소 정보
@@ -55,9 +54,9 @@ let isInitialized: boolean = false;
 const initializeExchange = async (): Promise<void> => {
     if (isInitialized == false) {
         isInitialized = true;
-        const prisma: PrismaClient = new PrismaClient();
 
         try {
+            const prisma = getDatabase();
             const exchanges = await prisma.exchanges.findMany();
             if (exchanges.length < exchangeInfos.length) {
                 await prisma.exchanges.createMany({
@@ -66,8 +65,6 @@ const initializeExchange = async (): Promise<void> => {
             }
         } catch (error) {
             console.error('Error initializing exchanges:', error);
-        } finally {
-            await prisma.$disconnect();
         }
     }
 };
@@ -76,14 +73,12 @@ await initializeExchange();
 
 export const findExchanges = async (): Promise<Array<EXCHANGE_INFO>> => {
     let exchanges: Array<EXCHANGE_INFO> = [];
-    const prisma: PrismaClient = new PrismaClient();
 
     try {
+        const prisma = getDatabase();
         exchanges = await prisma.exchanges.findMany() as Array<EXCHANGE_INFO>;
     } catch (error) {
         console.error('Error getting exchange:', error);
-    } finally {
-        await prisma.$disconnect();
     }
     return exchanges;
 }
@@ -91,17 +86,15 @@ export const findExchanges = async (): Promise<Array<EXCHANGE_INFO>> => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const _findExchange = async (where: Record<string, any>): Promise<EXCHANGE_INFO | undefined> => {
     let exchange: EXCHANGE_INFO | undefined = undefined;
-    const prisma: PrismaClient = new PrismaClient();
 
     try {
+        const prisma = getDatabase();
         const result = await prisma.exchanges.findFirst({
             where: where
         });
         exchange = (result) ? result as EXCHANGE_INFO : undefined;
     } catch (error) {
         console.error('Error getting exchange:', error);
-    } finally {
-        await prisma.$disconnect();
     }
     return exchange;
 }
