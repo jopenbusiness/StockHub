@@ -21,6 +21,7 @@
 
 ## Version History
 
+- 0.00.013 : 2025-04-10, Specification table 관리 모듈 제작
 - 0.00.012 : 2025-04-09, Secrets table 관리 모듈 제작
 - 0.00.011 : 2025-04-08, Exchanges table 관리 모듈 제작
 - 0.00.010 : 2025-04-08, Prisma 데이터베이스 관리 환경 구성

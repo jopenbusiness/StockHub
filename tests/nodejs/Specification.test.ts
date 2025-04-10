@@ -22,8 +22,8 @@ dotenv.config();
 //--- https://vitest.dev/guide/
 describe('Test Specification', () => {
     it('Text Specification', async () => {
-        const specification = await findSpecification(1, 't0424', true);
-        expect(specification).not.toBeDefined();
+        const specification = await findSpecification(1, 'tokenP', true);
+        expect(specification).toBeDefined();
 
 
 
