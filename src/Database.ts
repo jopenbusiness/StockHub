@@ -4,7 +4,7 @@
  * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
  */
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from './prismaClient/client.js';
 
 const prisma: PrismaClient = new PrismaClient();
 

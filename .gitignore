@@ -12,7 +12,7 @@ lib/
 built/
 cmd/
 
-#--- Pythone
+#--- Python
 __pycache__/
 .pytest_cache/
 dist/
@@ -30,3 +30,4 @@ zz*
 #--- StockHub
 files/sqlite3/
 prisma/migrations/
+src/prismaClient/
