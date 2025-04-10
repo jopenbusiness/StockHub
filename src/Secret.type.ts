@@ -20,7 +20,7 @@ export interface SECRET_INFO {                              //--- 사용자 Open
     userType: USER_TYPE,                                    //--- 사용자 구분
     account: string,                                        //--- 종합계좌번호
     accountSub: string,                                     //--- 계좌상품번호
-    feeType?: string,                                       //--- 수수료 타입 (뱅키스, 영업점, 패밀리, ISA)
+    feeType: string,                                        //--- 수수료 타입 (뱅키스, 영업점, 패밀리, ISA)
 
     grantType: GRANT_TYPE,                                  //--- 인증방식
     appKey: string,                                         //--- App Key
@@ -43,7 +43,7 @@ export interface SECRET_INFO {                              //--- 사용자 Open
     isProduct: boolean,                                     //--- 실전 투자 여부 (true: 실전투자, false: 모의투자)
     isActive: boolean,                                      //--- 활성 여부
     
-    json?: string
+    json: Record<string, unknown>
 };
 
 export interface REQUIRE_RESULT {

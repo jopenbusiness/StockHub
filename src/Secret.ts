@@ -5,7 +5,7 @@
  */
 
 import moment from 'moment';                                //--- 'YYYY-MM-DD HH:mm:ss.SSS ZZ'
-import { PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 
 import { findExchange } from './Exchange.js';
 import { REQUIRE_RESULT, SECRET_INFO } from './Secret.type.js';
@@ -29,11 +29,12 @@ const findSecret = async (id: number): Promise<SECRET_INFO | undefined> => {
     const prisma: PrismaClient = new PrismaClient();
 
     try {
-        secret = (await prisma.secrets.findFirst({
+        const result = await prisma.secrets.findFirst({
             where: {
                 id: id
             }
-        })) as SECRET_INFO;
+        });
+        secret = (result) ? result as SECRET_INFO : undefined;
     } catch (error) {
         console.error('Error getting secret:', error);
     } finally {
@@ -48,12 +49,13 @@ const findSecret = async (id: number): Promise<SECRET_INFO | undefined> => {
 //     const prisma = new PrismaClient();
 
 //     try {
-//         secret = (await prisma.secrets.findFirst({
+//         const result = await prisma.secrets.findFirst({
 //             where: {
 //                 account: account,
 //                 accountSub: accountSub
 //             }
-//         })) as SECRET_INFO;
+//         });
+//         secret = (result) ? result as SECRET_INFO : undefined;
 //     } catch (error) {
 //         console.error('Error getting secret:', error);
 //     } finally {
@@ -69,7 +71,7 @@ export const createSecret = async (item: SECRET_INFO): Promise<SECRET_INFO | und
         const secret: SECRET_INFO = (await prisma.secrets.create({
             data: {
                 ...item,
-                json: JSON.parse(item.json ?? '{}')
+                json: item.json as Prisma.InputJsonValue
             }
         })) as SECRET_INFO;
         return secret;
@@ -122,7 +124,7 @@ export const resetSecret = async (item: SECRET_INFO): Promise<SECRET_INFO | unde
         }
     }
 
-    //--- ToDo: token 재발급과 approval 재발을 진행 한다.
+    //--- ToDo: pppqqq, token 재발급과 approval 재발을 진행 한다.
     // const isRequire = await isRequireReset(secret);
     // // if ((isRequire.token == false) && (isRequire.approval == false)) {
     // //     return secret;

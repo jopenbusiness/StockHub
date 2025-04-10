@@ -4,8 +4,38 @@
  * @license GNU GENERAL PUBLIC LICENSE v3.0 (https://github.com/jopenbusiness/StockHub?tab=GPL-3.0-1-ov-file)
  */
 
-// import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
-// import { SPECIFICATION_INFO } from './Specification.type.js';
+import { findExchange } from './Exchange.js';
+import { SPECIFICATION_INFO } from './Specification.type.js';
 
-export const zzaa = '';
+export const findSpecification = async (exchangeId: number, trid: string, isProduct: boolean = true): Promise<SPECIFICATION_INFO | undefined> => {
+    const exchange = await findExchange(exchangeId);
+    if (exchange == undefined) {
+        console.error('Exchange not found');
+        return undefined;
+    }
+
+    let specification: SPECIFICATION_INFO | undefined = undefined;
+
+    const prisma: PrismaClient = new PrismaClient();
+    try {
+        const result = await prisma.specifications.findFirst({
+            where: {
+                exchangeId: exchange.id,
+                trid: trid,
+                isProduct: isProduct
+            }
+        });
+        specification = (result) ? result as unknown as SPECIFICATION_INFO : undefined;
+
+        if (specification == undefined) {
+            //--- pppqqq
+        }
+    } catch (error) {
+        console.error('Error getting specification:', error);
+    } finally {
+        await prisma.$disconnect();
+    }
+    return specification;
+}

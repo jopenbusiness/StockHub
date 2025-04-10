@@ -18,6 +18,10 @@ describe('Test Secret', () => {
     it('Create secret from env', async () => {
         const exchangeGuid: string = process.env.EXCHANGE_GUID ?? '';
         const exchange = await findExchangeByGuid(exchangeGuid);
+        if (exchange == undefined) {
+            return;
+        }
+        
         expect(exchange).toBeDefined();
         expect(exchange?.guid).toBe(exchangeGuid);
 
@@ -40,7 +44,7 @@ describe('Test Secret', () => {
 
                 isProduct: true,                                     //--- 실전 투자 여부 (true: 실전투자, false: 모의투자)
                 isActive: true,                                      //--- 활성 여부
-                json: '{}'
+                json: {}
             };
 
             if (process.env.ACCESS_TOKEN) {

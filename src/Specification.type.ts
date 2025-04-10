@@ -13,7 +13,7 @@ type SPEC_METHOD = 'get' | 'post';
 type SPEC_FORMAT = 'json';
 type SPEC_CONTENT_TYPE = 'application/json; charset=UTF-8' | 'application/x-www-form-urlencoded';
 
-interface SPEC_INFO {
+export interface SPEC_INFO {
     method: SPEC_METHOD,
     domain: EXCHANGE_DOMAIN_PRODUCT | EXCHANGE_DOMAIN_DEVELOP | EXCHANGE_WS_PRODUCT | EXCHANGE_WS_DEVELOP,
     url: string,
@@ -54,7 +54,7 @@ interface SPEC_FIELD {
 
 export interface SPECIFICATION_INFO {
     id?: number,
-    exchange: number,                                       //--- 거래소 ID
+    exchangeId: number,                                     //--- 거래소 ID
 
     category: string,                                       //--- 대분류
     subCategory: string,                                    //--- 중분류
@@ -76,11 +76,10 @@ export interface SPECIFICATION_INFO {
         header: Array<SPEC_FIELD>,
         body: Array<SPEC_FIELD>
     },
-    json?: string
+
+    json: Record<string, unknown>
 };
 
-
-  
 
 
 

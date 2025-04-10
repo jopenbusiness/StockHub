@@ -94,9 +94,10 @@ const _findExchange = async (where: Record<string, any>): Promise<EXCHANGE_INFO 
     const prisma: PrismaClient = new PrismaClient();
 
     try {
-        exchange = (await prisma.exchanges.findFirst({
+        const result = await prisma.exchanges.findFirst({
             where: where
-        })) as EXCHANGE_INFO;
+        });
+        exchange = (result) ? result as EXCHANGE_INFO : undefined;
     } catch (error) {
         console.error('Error getting exchange:', error);
     } finally {
