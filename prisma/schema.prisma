@@ -11,8 +11,17 @@ datasource db {
   url      = "file:../files/sqlite3/StockHub.db"
 }
 
+//--- prisma  generate 명령 실행시 실행됨
+//--- ./node_modules/@prisma/client/ 폴더에 생성됨
 generator client {
   provider = "prisma-client-js"
+}
+
+//--- https://witch.work/ko/posts/project-prisma-markdown
+generator markdown {
+  provider = "prisma-markdown"
+  output   = "../files/sqlite3/StockHub_ERD.md"
+  title    = "OBCon StockHub ERD"
 }
 
 model Exchanges {                                           //--- 거래소 정보

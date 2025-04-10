@@ -66,6 +66,7 @@
         "hereby": "^1.10.0",
         "prettier": "^3.5.3",
         "prisma": "^6.6.0",
+        "prisma-markdown": "^2.0.0",
         "rimraf": "^6.0.1",
         "tsx": "^4.19.3",
         "typescript": "^5.8.3",
